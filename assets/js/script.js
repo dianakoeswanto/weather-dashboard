@@ -40,7 +40,6 @@ const fetchLongLat = async (cityName) => {
         alert("City name doesn't exist");
         resetDisplay();
     } else {
-        console.log(responseJSON);
         const lon = responseJSON.coord.lon;
         const lat = responseJSON.coord.lat;
     
@@ -164,4 +163,9 @@ const getUVIBadge = (uvi) => {
     }
 }
 
+const init = () => {
+    fetchLongLat("Sydney,AU");
+}
+
+init();
 projectFormEl.on('submit', handleCitySearchSubmit);
