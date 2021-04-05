@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather Dashboard</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+        <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"
+        ></script>
+        <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+        ></script>
+    </head>
+    <body>
+        <header class="container-fluid bg-dark text-light mb-5 p-3">
+            <div class="d-flex align-items-center">
+                <h1>Weather Dashboard</h1>
+            </div>
+        </header>
+        <main>
+            <section class="mx-5">
+                <div class="row">
+                    <div class="card col-12 col-md-3 col-xl-3 border-0">
+                        <div class="card-body mt-2">
+                            <h5 class="card-title">Search for a city:</h5>
+                            <form id="project-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="inputCity" placeholder="Enter a city">
+                                </div>
+                                <button type="Search" class="btn btn-block btn-primary full-width">Search</button>
+                            </form>
+                        </div>
+                    </div>
+    
+                    <div class="col-12 col-md-9 col-xl-9">
+                        <div class="card">
+                            <div class="card-body col-12 border-1 mb-3" id="current-weather">
+                                <h5 class="card-title" id="current-city"></h5>
+                                <div id="current-temp"></div>
+                                <div id="current-wind"></div>
+                                <div id="current-humidity"></div>
+                                <div id="current-uvi"></div>
+                            </div>
+                        </div>
+                        <h6 class="row px-4 py-3">5-Day Forecast:</h6>
+                        <div class="row justify-content-between px-3 small" id="forecast">
+                            
+                            <!-- <div class="card col-12 col-md-3 col-xl-2">
+                                    "Weather 1"
+                            </div>
+                            <div class="card col-12 col-md-3 col-xl-2">
+                                    "Weather 2"
+                            </div>
+                            <div class="card col-12 col-md-3 col-xl-2">
+                                    "Weather 3"
+                            </div>
+                            <div class="card col-12 col-md-3 col-xl-2">
+                                    "Weather 4"
+                            </div>
+                            <div class="card col-12 col-md-3 col-xl-2">
+                                    "Weather 5"
+                            </div>  -->
+                        </div>
+                </div>
+                    
+            </section>
+        </main>
+    </body>
+    <script src="./assets/js/script.js"></script>
+</html>

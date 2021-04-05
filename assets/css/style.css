@@ -1,0 +1,13 @@
+h6 {
+    font-size: 14px;
+}
+
+.badge-high {
+    background-color: red;
+    color: white;
+}
+
+.badge-extreme {
+    background-color: purple;
+    color: white;
+}
