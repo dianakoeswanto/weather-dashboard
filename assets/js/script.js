@@ -1,7 +1,7 @@
 const projectFormEl = $('#project-form');
 const currentWeatherEl = document.getElementById('current-weather');
 const forecastEl = document.getElementById('forecast');
-
+const historyEl = document.getElementById('history');
 
 const api = 'cbb60b34001a3d28a017d24e3403afce';
 
@@ -11,20 +11,20 @@ const api = 'cbb60b34001a3d28a017d24e3403afce';
 const handleCitySearchSubmit = (event) => {
     event.preventDefault();
 
-    resetDisplay();
-
-    const cityInput = $('#inputCity').val().trim();
-    if(!cityInput) {
+    const cityName = document.getElementById('inputCity').value.trim();
+    if(!cityName) {
         alert("Please enter a city");
         return;
     }
 
-    fetchLongLat(cityInput);
+    fetchLongLat(cityName);
+    
 }
 
 const resetDisplay = () => {
     currentWeatherEl.innerHTML = "";
     forecastEl.innerHTML = "";
+    historyEl.innerHTML = "";
     $('#inputCity').val("");
 }
 
@@ -43,7 +43,10 @@ const fetchLongLat = async (cityName) => {
         const lon = responseJSON.coord.lon;
         const lat = responseJSON.coord.lat;
     
+        resetDisplay();
         fetchWeatherReport(lon, lat);
+        localStorage.setItem(`${responseJSON.name}, ${responseJSON.sys.country}`, 1);
+        displaySearchHistory();
     }
 }
 
@@ -56,10 +59,7 @@ const fetchWeatherReport = async (lon, lat) => {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&appid=${api}`);
     const weatherReport = await response.json();
 
-    console.log(weatherReport);
-    
     displayWeather(currentWeatherEl, weatherReport.daily[0], weatherReport.timezone, false);
-
 
     for(let i = 1; i < weatherReport.daily.length - 2; i++) {
         const weatherEl = document.createElement("div");
@@ -70,17 +70,27 @@ const fetchWeatherReport = async (lon, lat) => {
     }
 }
 
-const displayWeather = (weatherEl, weather, cityName, isForecast) => {
+/**
+ * Creates element and displays on screen
+ * @param {*} weatherEl Element to add weather information to
+ * @param {*} weather Data about the weather to be displayed in the card
+ * @param {*} cityName The entered city name
+ * @param {*} isDailyForecast Boolean to indiciate if weather is today's weather or upcoming
+ */
+const displayWeather = (weatherEl, weather, cityName, isDailyForecast) => {
     weatherEl.appendChild(getTitle(cityName, weather));
     weatherEl.appendChild(getTemp(weather));
     weatherEl.appendChild(getWind(weather));
     weatherEl.appendChild(getHumidity(weather));
 
-    if(!isForecast) {
+    if(!isDailyForecast) {
         weatherEl.appendChild(getUVI(weather));
     }
 }
 
+/** 
+ * Creates the card title
+ */
 const getTitle = (city, dailyWeather) => {
     const titleEl = document.createElement("h6");
     if(city) {
@@ -103,6 +113,11 @@ const getTitle = (city, dailyWeather) => {
     return titleEl;
 }
 
+/**
+ * Creates the temp information
+ * @param {*} dailyWeather The weather
+ * @returns 
+ */
 const getTemp = (dailyWeather) => {
     const tempEl = document.createElement("div");
     tempEl.innerHTML = `Temp: ${dailyWeather.temp.day} &#8457`;
@@ -110,6 +125,11 @@ const getTemp = (dailyWeather) => {
     return tempEl;
 }
 
+/**
+ * Creates the wind information
+ * @param {*} dailyWeather 
+ * @returns 
+ */
 const getWind = (dailyWeather) => {
     const windEl = document.createElement('div');
     windEl.innerHTML = `Wind: ${dailyWeather.wind_speed} MPH`;
@@ -117,6 +137,11 @@ const getWind = (dailyWeather) => {
     return windEl;
 }
 
+/**
+ * Creates the humidity information
+ * @param {*} dailyWeather 
+ * @returns 
+ */
 const getHumidity = (dailyWeather) => {
     const humidityEl = document.createElement('div');
     humidityEl.innerHTML = `Humidity: ${dailyWeather.wind_speed} %`;
@@ -124,6 +149,11 @@ const getHumidity = (dailyWeather) => {
     return humidityEl;
 }
 
+/**
+ * Creates the uvi index information
+ * @param {*} dailyWeather 
+ * @returns 
+ */
 const getUVI = (dailyWeather) => {
     //Create UVI Index Label
     const uviEl = document.createElement('div');
@@ -141,6 +171,11 @@ const getUVI = (dailyWeather) => {
     return uviEl;
 }
 
+/**
+ * Gets the badge class name so it can be displayed in different colors
+ * @param {*} uvi 
+ * @returns 
+ */
 const getUVIBadge = (uvi) => {
     if (uvi < 3) {
         return "badge-success";
@@ -163,9 +198,34 @@ const getUVIBadge = (uvi) => {
     }
 }
 
+/**
+ * Display Search History
+ */
+const displaySearchHistory = () => {
+    for(let idx = 0; idx < localStorage.length; idx++) {
+        displayLastSearched(localStorage.key(idx));
+    }
+}
+
+const displayLastSearched = (searchedCityName) => {
+    const buttonEl = document.createElement("button");
+    buttonEl.setAttribute("type", "button");
+    buttonEl.classList.add("btn", "btn-block", "btn-success", "full-width");
+    buttonEl.innerHTML = searchedCityName;
+
+    buttonEl.addEventListener("click", (e) => {
+        fetchLongLat(e.target.textContent);
+    })
+    historyEl.prepend(buttonEl);
+}
+
+/**
+ * Initial load of application
+ */
 const init = () => {
     fetchLongLat("Sydney,AU");
 }
 
 init();
 projectFormEl.on('submit', handleCitySearchSubmit);
+

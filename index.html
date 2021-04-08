@@ -15,28 +15,35 @@
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
         ></script>
+
     </head>
     <body>
+        <!-- Header -->
         <header class="container-fluid bg-dark text-light mb-5 p-3">
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
                 <h1>Weather Dashboard</h1>
-            </div>
+            </div> -->
         </header>
         <main>
             <section class="mx-5">
                 <div class="row">
+                    <!-- Search column -->
                     <div class="card col-12 col-md-3 col-xl-3 border-0">
-                        <div class="card-body mt-2">
-                            <h5 class="card-title">Search for a city:</h5>
+                        <div class="card-body">
+                            <h5 class="card-title pt-4">Search for a city:</h5>
                             <form id="project-form">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="inputCity" placeholder="Enter a city">
                                 </div>
                                 <button type="Search" class="btn btn-block btn-primary full-width">Search</button>
                             </form>
+                            <div id="history" class="pt-3">
+
+                            </div>
                         </div>
-                    </div>
+                     </div>
     
+                    <!-- Weather Dashboard Column -->
                     <div class="col-12 col-md-9 col-xl-9">
                         <div class="card">
                             <div class="card-body col-12 border-1 mb-3" id="current-weather">
@@ -49,25 +56,10 @@
                         </div>
                         <h6 class="row px-4 py-3">5-Day Forecast:</h6>
                         <div class="row justify-content-between px-3 small" id="forecast">
-                            
-                            <!-- <div class="card col-12 col-md-3 col-xl-2">
-                                    "Weather 1"
-                            </div>
-                            <div class="card col-12 col-md-3 col-xl-2">
-                                    "Weather 2"
-                            </div>
-                            <div class="card col-12 col-md-3 col-xl-2">
-                                    "Weather 3"
-                            </div>
-                            <div class="card col-12 col-md-3 col-xl-2">
-                                    "Weather 4"
-                            </div>
-                            <div class="card col-12 col-md-3 col-xl-2">
-                                    "Weather 5"
-                            </div>  -->
+                            <!-- Dynamically generated -->
                         </div>
                 </div>
-                    
+
             </section>
         </main>
     </body>
