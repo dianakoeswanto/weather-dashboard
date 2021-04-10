@@ -56,7 +56,7 @@ const fetchLongLat = async (cityName) => {
  * @param {*} lat Latitude
  */
 const fetchWeatherReport = async (lon, lat) => {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&appid=${api}`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=imperial&appid=${api}`);
     const weatherReport = await response.json();
 
     displayWeather(currentWeatherEl, weatherReport.daily[0], weatherReport.timezone, false);
