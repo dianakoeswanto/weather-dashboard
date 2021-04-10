@@ -106,7 +106,7 @@ const getTitle = (city, dailyWeather) => {
     titleEl.appendChild(dateEl);
 
     const iconEl = document.createElement("img");
-    iconEl.setAttribute("src", `http://openweathermap.org/img/wn/${dailyWeather.weather[0].icon}.png`)
+    iconEl.setAttribute("src", `https://openweathermap.org/img/wn/${dailyWeather.weather[0].icon}.png`)
     iconEl.style.width = "40px";
     titleEl.appendChild(iconEl);
 
