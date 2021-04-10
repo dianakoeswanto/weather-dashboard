@@ -224,8 +224,9 @@ const displayLastSearched = (searchedCityName) => {
  */
 const init = () => {
     fetchLongLat("Sydney,AU");
+    projectFormEl.on('submit', handleCitySearchSubmit);
 }
 
-init();
-projectFormEl.on('submit', handleCitySearchSubmit);
-
+$(document).ready( () => {
+    init();
+})
