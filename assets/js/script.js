@@ -63,7 +63,7 @@ const fetchWeatherReport = async (lon, lat) => {
 
     for(let i = 1; i < weatherReport.daily.length - 2; i++) {
         const weatherEl = document.createElement("div");
-        weatherEl.classList.add("card", "col-12", "col-md-3", "col-xl-2", "bg-dark", "text-light", "py-3");
+        weatherEl.classList.add("card", "col-12", "col-md-3", "col-xl-2", "bg-dark", "text-light", "py-3", "mx-2", "mb-3");
 
         displayWeather(weatherEl, weatherReport.daily[i], "", true);
         forecastEl.appendChild(weatherEl);
