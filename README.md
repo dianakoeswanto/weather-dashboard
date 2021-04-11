@@ -1,4 +1,4 @@
-# weather-dashboard
+# Weather Dashboard
 
 Displays current weather & the next 5 days for a given city.
 By default, it will load Sydney's weather.
